@@ -1,12 +1,10 @@
 variables:
   NUGET_PATH: 'C:\Tools\Nuget\nuget.exe'
-  MSBUILD_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin'
-  XUNIT_PATH: packages\xunit.runner.console.2.3.1\tools\net452
-  UNITTEST_FOLDER: '.\tests\CiCdExample.Tests\bin\Release\'
+  MSBUILD_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\msbuild.exe'
+
 
 stages:
   - build
-  - test
   - deploy
 
 build_job:
@@ -24,23 +22,14 @@ build_job:
       - '$env:UNITTEST_FOLDER'
       - '.\$env:XUNIT_PATH\*.*'
 
-test_job:
-  stage: test
-  only:
-    - branches
-  script:
-    - '& "$env:XUNIT_PATH\xunit.console.exe" "$env:UNITTEST_FOLDER\CiCdExample.Tests.dll"'
-  dependencies:
-    - build_job
-
 deploy_job:
   stage: deploy
   only:
     - branches
   script:
-    - 'xcopy /y /s ".\src\CiCdExample\bin\Release\Publish\*.*" "C:\Deployment\ci-cd-example"'
+    - 'xcopy /y /s ".\src\CiCdExample.Web\bin\Release\Publish\*.*" "C:\Deployment\ci-cd-example"'
 
   dependencies:
     - build_job
-    - test_job
+
   
