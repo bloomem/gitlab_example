@@ -1,12 +1,10 @@
 variables:
-  PROJECT_NAME: "DotnetCI"
+  SOLUTION_NAME: "DotnetCI"
   NUGET_PATH: 'C:\Tools\Nuget\nuget.exe'
   MSBUILD_PATH: 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe'
 
 before_script:
-  - echo "starting build for %PROJECT_NAME%"
-  - echo "Restoring NuGet Packages..."
-  - c:\Tools\nuget restore "%PROJECT_NAME%.sln"
+
 
 stages:
   - build
@@ -16,7 +14,11 @@ build:
   stage: build
 
   script:
-     - '"%MSBUILD_PATH%" /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /property:Configuration=Release /verbosity:quiet "%PROJECT_NAME%.sln"'
+  - echo "Restoring NuGet Packages..."
+  - 'C:/nuget/NuGet.exe restore'
+  
+  - echo "Building"
+  - '"%MSBUILD_PATH%" "%PROJECT_NAME%.sln"'
   artifacts:
     expire_in: 2 days
     paths:
