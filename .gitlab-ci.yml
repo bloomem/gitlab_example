@@ -15,7 +15,7 @@ build:
 
   script:
   - echo "Restoring NuGet Packages..."
-  - 'C:/nuget/NuGet.exe restore'
+  - 'C:\Tools\Nuget/NuGet.exe restore'
   
   - echo "Building"
   - '"%MSBUILD_PATH%" "%PROJECT_NAME%.sln"'
