@@ -16,7 +16,7 @@ build_job:
   stage: build
 - echo "Starting build stage..."
   script:
-     - '"C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\msbuild.exe" /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /property:Configuration=Release /verbosity:quiet "%PROJECT_NAME%.sln"'
+     - '"C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe" /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /property:Configuration=Release /verbosity:quiet "%PROJECT_NAME%.sln"'
   artifacts:
     expire_in: 2 days
     paths:
