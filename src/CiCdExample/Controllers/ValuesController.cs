@@ -14,7 +14,7 @@ namespace CiCdExample.Controllers
         // GET api/values/5
         public string Get(int id)
         {
-            return $"value: {id}";
+            return "test";
         }
 
         // POST api/values
