@@ -5,7 +5,6 @@ variables:
 
 before_script:
 
-
 stages:
   - build
   - deploy
@@ -15,7 +14,7 @@ build:
 
   script:
   - echo "Restoring NuGet Packages..."
-  - '"%NUGET_PATH%" restore'
+  - '"%NUGET_PATH%" restore "%PROJECT_NAME%.sln"'
   
   - echo "Building"
   - '"%MSBUILD_PATH%" "%PROJECT_NAME%.sln"'
