@@ -17,7 +17,7 @@ build:
   - '& "$env:NUGET_PATH" restore'
   
   - echo "Building"
-  - '"%MSBUILD_PATH%" "C:\Users\mbloome\source\repos\gitlab-ci-cd-dotnet-framework\DotnetCI.sln"'
+  - '& "$env:MSBUILD_PATH" src\CiCdExample\CiCdExample.csproj /p:DeployOnBuild=true /p:Configuration=Release /P:PublishProfile=FolderProfile.pubxml'
   artifacts:
     expire_in: 2 days
     paths:
