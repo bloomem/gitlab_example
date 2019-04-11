@@ -17,7 +17,7 @@ build:
   - '"%NUGET_PATH%" restore "C:\Users\mbloome\source\repos\gitlab-ci-cd-dotnet-framework\DotnetCI.sln"'
   
   - echo "Building"
-  - '"%MSBUILD_PATH%" "%PROJECT_NAME%.sln"'
+  - '"%MSBUILD_PATH%" "C:\Users\mbloome\source\repos\gitlab-ci-cd-dotnet-framework\DotnetCI.sln"'
   artifacts:
     expire_in: 2 days
     paths:
