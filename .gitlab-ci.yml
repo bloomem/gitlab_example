@@ -15,10 +15,10 @@ build:
 
   script:
   - echo "Restoring NuGet Packages..."
-  - '"%MSBUILD_PATH%" restore'
+  - '"%NUGET_PATH%" restore'
   
   - echo "Building"
-  - '"%NUGET_PATH%" "%PROJECT_NAME%.sln"'
+  - '"%MSBUILD_PATH%" "%PROJECT_NAME%.sln"'
   artifacts:
     expire_in: 2 days
     paths:
