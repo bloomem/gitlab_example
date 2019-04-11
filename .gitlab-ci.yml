@@ -14,7 +14,7 @@ build:
 
   script:
   - echo "Restoring NuGet Packages..."
-  - '"%NUGET_PATH%" restore "C:\Users\mbloome\source\repos\gitlab-ci-cd-dotnet-framework\DotnetCI.sln"'
+  - '& "$env:NUGET_PATH" restore'
   
   - echo "Building"
   - '"%MSBUILD_PATH%" "C:\Users\mbloome\source\repos\gitlab-ci-cd-dotnet-framework\DotnetCI.sln"'
