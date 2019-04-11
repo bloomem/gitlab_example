@@ -6,23 +6,23 @@ variables:
 before_script:
   - echo "starting build for %PROJECT_NAME%"
   - echo "Restoring NuGet Packages..."
-  - C:\Tools\Nuget restore "%PROJECT_NAME%.sln"
+  - c:\Tools\nuget restore "%PROJECT_NAME%.sln"
 
 stages:
   - build
   - deploy
 
-build_job:
+build:
   stage: build
-- echo "Starting build stage..."
+
   script:
-     - '"C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe" /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /property:Configuration=Release /verbosity:quiet "%PROJECT_NAME%.sln"'
+     - '"%MSBUILD_PATH%" /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /property:Configuration=Release /verbosity:quiet "%PROJECT_NAME%.sln"'
   artifacts:
     expire_in: 2 days
     paths:
       - '.\src\CiCdExample.Web\bin\Release\Publish\'
 
-deploy_job:
+deploy:
   stage: deploy
   only:
     - branches
@@ -30,6 +30,6 @@ deploy_job:
     - 'xcopy /y /s ".\src\CiCdExample.Web\bin\Release\Publish\*.*" "C:\Deployment\ci-cd-example"'
 
   dependencies:
-    - build_job
+    - build
 
   
