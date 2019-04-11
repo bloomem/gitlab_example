@@ -1,12 +1,12 @@
 variables:
   PROJECT_NAME: "DotnetCI"
   NUGET_PATH: 'C:\Tools\Nuget\nuget.exe'
-  MSBUILD_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\msbuild.exe'
+  MSBUILD_PATH: 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe'
 
 before_script:
   - echo "starting build for %PROJECT_NAME%"
   - echo "Restoring NuGet Packages..."
-  - 'C:\Tools\Nuget restore "%PROJECT_NAME%.sln"
+  - C:\Tools\Nuget restore "%PROJECT_NAME%.sln"
 
 stages:
   - build
