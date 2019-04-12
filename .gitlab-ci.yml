@@ -2,6 +2,8 @@ variables:
   SOLUTION_NAME: "DotnetCI"
   NUGET_PATH: 'C:\Tools\Nuget\nuget.exe'
   MSBUILD_PATH: 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe'
+  MSTEST_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE'
+  UNITTEST_FOLDER: '.\tests\CiCdExample.Tests\bin\'
 
 before_script:
  - git remote -v
@@ -9,6 +11,7 @@ before_script:
 
 stages:
   - build
+  - test
   - deploy
 
 build_job:
@@ -28,6 +31,11 @@ build_job:
     expire_in: 2 days
     paths:
       - '.\src\CiCdExample\bin\'
+
+test_job:
+  stage: test
+  - echo "Testing"
+  - '& "$env:MSTEST_PATH" "$env:UNITTEST_FOLDER\CiCdExample.Tests.dll"'
 
 deploy_job:
   stage: deploy
