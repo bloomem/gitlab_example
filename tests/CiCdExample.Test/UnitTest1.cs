@@ -1,3 +1,4 @@
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CiCdExample.Test
@@ -12,7 +13,7 @@ namespace CiCdExample.Test
         }
 
         [TestMethod]
-        public void TestMethod2()
+        public void TestMethod3()
         {
             Assert.IsTrue((1 + 2) == 3);
         }
