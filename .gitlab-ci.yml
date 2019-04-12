@@ -31,6 +31,8 @@ build_job:
     expire_in: 2 days
     paths:
       - '.\src\CiCdExample\bin\'
+      - '$env:UNITTEST_FOLDER'
+      - '.\$env:MSTEST_PATH\*.*'
 
 test_job:
   stage: test
