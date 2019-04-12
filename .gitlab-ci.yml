@@ -34,7 +34,7 @@ deploy_job:
   only:
     - branches
   script:
-    - 'xcopy /y /s ".\src\CiCdExample\bin\Release\Publish\*.*" "C:\inetpub\wwwroot\ci-cd-example"'
+    - 'xcopy /y /s ".\src\CiCdExample\bin\*.*" "C:\inetpub\wwwroot\ci-cd-example"'
 
   dependencies:
     - build_job
