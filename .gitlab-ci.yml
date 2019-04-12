@@ -27,7 +27,7 @@ build_job:
   - echo "Building..."
   - '& "$env:MSBUILD_PATH" /p:Configuration=Release /clp:ErrorsOnly'
   - '& "$env:MSBUILD_PATH" src\CiCdExample\CiCdExample.csproj /p:DeployOnBuild=true /p:Configuration=Release /P:PublishProfile=FolderProfile.pubxml'
-  - '& "$env:MSBUILD_PATH" Tests\CiCdExample.Tests\CiCdExample.Test.csproj /p:DeployOnBuild=true /p:Configuration=Release /P:PublishProfile=FolderProfile.pubxml'
+  - '& "$env:MSBUILD_PATH" Tests\CiCdExample.Test\CiCdExample.Test.csproj /p:DeployOnBuild=true /p:Configuration=Release /P:PublishProfile=FolderProfile.pubxml'
   artifacts:
     expire_in: 2 days
     paths:
