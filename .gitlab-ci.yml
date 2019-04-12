@@ -9,19 +9,26 @@ stages:
   - build
   - deploy
 
-build:
+build_job:
   stage: build
+  
+  only:
+    - branches
 
   script:
   - echo "Restoring NuGet Packages..."
   - '& "$env:NUGET_PATH" restore'
   
   - echo "Building"
+  - '& "$env:MSBUILD_PATH" /p:Configuration=Release /clp:ErrorsOnly'
   - '& "$env:MSBUILD_PATH" src\CiCdExample\CiCdExample.csproj /p:DeployOnBuild=true /p:Configuration=Release /P:PublishProfile=FolderProfile.pubxml'
   artifacts:
+  expire_in: 2 days
+  paths:
+      - '.\src\CiCdExample\bin\Release\Publish\'
 
 
-deploy:
+deploy_job:
   stage: deploy
   only:
     - branches
@@ -29,6 +36,6 @@ deploy:
     - 'xcopy /y /s ".\src\CiCdExample\bin\Release\Publish\*.*" "C:\inetpub\wwwroot\ci-cd-example"'
 
   dependencies:
-    - build
+    - build_job
 
   
