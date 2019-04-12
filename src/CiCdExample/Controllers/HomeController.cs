@@ -6,7 +6,7 @@ namespace CiCdExample.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Hello World";
+            ViewBag.Title = "Hello World from GitLab";
 
             return View();
         }
