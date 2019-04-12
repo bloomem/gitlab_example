@@ -6,7 +6,6 @@ variables:
 before_script:
  - git remote -v
  - git remote rm origin
- - git lfs install
 
 stages:
   - build
