@@ -23,10 +23,9 @@ build_job:
   - '& "$env:MSBUILD_PATH" /p:Configuration=Release /clp:ErrorsOnly'
   - '& "$env:MSBUILD_PATH" src\CiCdExample\CiCdExample.csproj /p:DeployOnBuild=true /p:Configuration=Release /P:PublishProfile=FolderProfile.pubxml'
   artifacts:
-  expire_in: 2 days
-  paths:
+    expire_in: 2 days
+    paths:
       - '.\src\CiCdExample\bin\Release\Publish\'
-
 
 deploy_job:
   stage: deploy
