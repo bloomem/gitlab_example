@@ -24,7 +24,7 @@ build_job:
   - echo "Restoring NuGet Packages..."
   - '& "$env:NUGET_PATH" restore'
   
-  - echo "Building"
+  - echo "Building..."
   - '& "$env:MSBUILD_PATH" /p:Configuration=Release /clp:ErrorsOnly'
   - '& "$env:MSBUILD_PATH" src\CiCdExample\CiCdExample.csproj /p:DeployOnBuild=true /p:Configuration=Release /P:PublishProfile=FolderProfile.pubxml'
   artifacts:
@@ -34,7 +34,9 @@ build_job:
 
 test_job:
   stage: test
-  - echo "Testing"
+  
+  script:
+  - echo "Testing..."
   - '& "$env:MSTEST_PATH" "$env:UNITTEST_FOLDER\CiCdExample.Tests.dll"'
 
 deploy_job:
