@@ -41,6 +41,9 @@ test_job:
   script:
   - echo "Testing..."
   - '& "$env:MSTEST_PATH" /testcontainer:"$env:UNITTEST_FOLDER\CiCdExample.Tests.dll"'
+  
+  dependencies:
+    - build_job
 
 deploy_job:
   stage: deploy
