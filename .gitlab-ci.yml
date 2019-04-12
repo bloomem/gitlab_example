@@ -27,7 +27,7 @@ build_job:
   artifacts:
     expire_in: 2 days
     paths:
-      - '.\src\CiCdExample\bin\Release\Publish\'
+      - '.\src\CiCdExample\bin\'
 
 deploy_job:
   stage: deploy
