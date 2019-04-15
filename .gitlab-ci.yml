@@ -41,7 +41,8 @@ test_job:
   
   script:
   - echo "Testing..."
-  - '& "$env:MSTEST_PATH" /testcontainer:"$env:UNITTEST_FOLDER\CiCdExample.Test.dll"'
+  # - '& "$env:MSTEST_PATH" /testcontainer:"$env:UNITTEST_FOLDER\CiCdExample.Test.dll"'
+  - '& "$env:MSTEST_PATH" "$env:UNITTEST_FOLDER\CiCdExample.Test.dll"'
   
   dependencies:
     - build_job
