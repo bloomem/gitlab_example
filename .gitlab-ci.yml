@@ -3,7 +3,7 @@ variables:
   NUGET_PATH: 'C:\Tools\Nuget\nuget.exe'
   MSBUILD_PATH: 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe'
   MSTEST_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\MSTest.exe'
-  UNITTEST_FOLDER: '.\tests\CiCdExample.Test\bin\debug'
+  UNITTEST_FOLDER: 'C:\Users\mbloome\source\repos\gitlab-ci-cd-dotnet-framework\tests\CiCdExample.Test\bin\Debug'
 
 before_script:
  - git remote -v
@@ -27,7 +27,7 @@ build_job:
   - echo "Building..."
   - '& "$env:MSBUILD_PATH" /p:Configuration=Release /clp:ErrorsOnly'
   - '& "$env:MSBUILD_PATH" src\CiCdExample\CiCdExample.csproj /p:DeployOnBuild=true /p:Configuration=Release /P:PublishProfile=FolderProfile.pubxml'
-  - '& "$env:MSBUILD_PATH" Tests\CiCdExample.Test\CiCdExample.Test.csproj /p:DeployOnBuild=true /p:Configuration=Release /P:PublishProfile=FolderProfile.pubxml'
+  - '& "$env:MSBUILD_PATH" tests\CiCdExample.Test\CiCdExample.Test.csproj /p:DeployOnBuild=true /p:Configuration=Release /P:PublishProfile=FolderProfile.pubxml'
   artifacts:
     expire_in: 2 days
     paths:
