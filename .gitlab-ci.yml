@@ -2,6 +2,9 @@ variables:
   SOLUTION_NAME: "DotnetCI"
   NUGET_PATH: 'C:\Tools\Nuget\nuget.exe'
   MSBUILD_PATH: 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe'
+  #MSTEST_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\MSTest.exe'
+  MSTEST_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\Extensions\TestPlatform\vstest.console.exe'
+  UNITTEST_FOLDER: 'C:\Users\mbloome\source\repos\gitlab-ci-cd-dotnet-framework\tests\CiCdExample.Test\bin\Debug'
 
 before_script:
  - git remote -v
@@ -9,6 +12,7 @@ before_script:
 
 stages:
   - build
+  - test
   - deploy
 
 build_job:
@@ -21,13 +25,27 @@ build_job:
   - echo "Restoring NuGet Packages..."
   - '& "$env:NUGET_PATH" restore'
   
-  - echo "Building"
+  - echo "Building..."
   - '& "$env:MSBUILD_PATH" /p:Configuration=Release /clp:ErrorsOnly'
   - '& "$env:MSBUILD_PATH" src\CiCdExample\CiCdExample.csproj /p:DeployOnBuild=true /p:Configuration=Release /P:PublishProfile=FolderProfile.pubxml'
+  - '& "$env:MSBUILD_PATH" tests\CiCdExample.Test\CiCdExample.Test.csproj /p:DeployOnBuild=true /p:Configuration=Release /P:PublishProfile=FolderProfile.pubxml'
   artifacts:
     expire_in: 2 days
     paths:
       - '.\src\CiCdExample\bin\'
+      - '$env:UNITTEST_FOLDER'
+      - '.\$env:MSTEST_PATH\*.*'
+
+test_job:
+  stage: test
+  
+  script:
+  - echo "Testing..."
+  # - '& "$env:MSTEST_PATH" /testcontainer:"$env:UNITTEST_FOLDER\CiCdExample.Test.dll"'
+  - '& "$env:MSTEST_PATH" "$env:UNITTEST_FOLDER\CiCdExample.Test.dll"'
+  
+  dependencies:
+    - build_job
 
 deploy_job:
   stage: deploy
@@ -38,5 +56,6 @@ deploy_job:
 
   dependencies:
     - build_job
+    - test_job
 
   
