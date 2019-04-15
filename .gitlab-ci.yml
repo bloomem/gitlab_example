@@ -2,7 +2,8 @@ variables:
   SOLUTION_NAME: "DotnetCI"
   NUGET_PATH: 'C:\Tools\Nuget\nuget.exe'
   MSBUILD_PATH: 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe'
-  MSTEST_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\MSTest.exe'
+  #MSTEST_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\MSTest.exe'
+  MSTEST_PATH: 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\Extensions\TestPlatform\vstest.console.exe'
   UNITTEST_FOLDER: 'C:\Users\mbloome\source\repos\gitlab-ci-cd-dotnet-framework\tests\CiCdExample.Test\bin\Debug'
 
 before_script:
