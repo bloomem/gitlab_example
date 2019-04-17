@@ -8,7 +8,6 @@ namespace CiCdExample.Controllers
         {
             ViewBag.Title = "Hello World from GitLab ADDME Research Today";
 
-            var newstring = ($"break build");
             return View();
         }
     }
